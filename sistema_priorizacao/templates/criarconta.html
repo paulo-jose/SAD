@@ -1,0 +1,34 @@
+{% extends "homepage.html" %}
+
+<{% block titulo %}
+    Criar Conta
+{% endblock %}
+
+{% block formulario %}
+
+        <div class="div-input">
+                {{ form.email.label(class="label") }}
+                {{ form.email(class="input") }}
+        </div>
+        <div class="div-input">
+                {{ form.username.label(class="label") }}
+                {{ form.username(class="input") }}
+        </div>
+        <div class="div-input">
+                {{ form.senha.label(class="label") }}
+                {{ form.senha(class="input") }}
+        </div>
+        <div class="div-input">
+                {{ form.confirmacao_senha.label(class="label") }}
+                {{ form.confirmacao_senha(class="input") }}
+        </div>
+        <div class="div-botao">
+                {{ form.botao_confirmacao(class="botao-login") }}
+                <a class="link-criarconta" href="{{ url_for('homepage')}}"> Ja tem uma conta? Faça login </a>
+        </div>
+{% endblock %}
+
+
+{% block link %}
+<a class="link-criarconta" href="{{ url_for('homepage')}}"> Ja tem uma conta? Faça login </a>
+{% endblock %}

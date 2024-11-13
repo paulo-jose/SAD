@@ -1,0 +1,39 @@
+{% extends "homepage.html" %}
+
+<{% block titulo %}
+    Editar Projeto
+{% endblock %}
+
+        {% block cabecalho %}
+          <center><h2>Alterar Projeto</h2></center>
+        {% endblock %}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastro de Projeto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+
+          {% block formulario %}
+
+        <div class="div-input">
+                {% if id_criterio %}
+                    {{ form.nome_criterio.label(class="label") }}
+                    {{ form.nome_criterio(class="input") }}
+                {% else  %}
+                    {{ form.nome_projeto.label(class="label") }}
+                    {{ form.nome_projeto(class="input") }}
+                {% endif  %}
+        </div>
+
+        <div class="div-botao">
+                {{ form.botao_editar(class="botao-login") }}
+        </div>
+        {% endblock %}
+
+  </div>
+</div>
+

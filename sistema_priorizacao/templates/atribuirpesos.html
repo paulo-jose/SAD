@@ -1,0 +1,75 @@
+{% extends "homepage.html" %}
+
+<{% block titulo %}
+    Atribuir Pesos
+{% endblock %}
+
+{% block cabecalho %}
+    <center><h2>Atribuir Pesos Par a Par</h2></center>
+{% endblock %}
+
+{% block body %}
+    <center><h2>Atribuir Pesos Par a Par</h2></center>
+
+
+<table border="1" class="table table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Critério</th>
+                <th scope="col">Critério 2</th>
+                <th scope="col">Escala de Preferencia</th>
+            </tr>
+        </thead>
+
+    {% for criterio in criterios %}
+    {% for subcriterio in criterio.criterios %}
+    {% if criterio != subcriterio %}
+
+    <tr>
+        <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> {{ criterio.nome }}</td>
+        <td class="col-xs-4 col-sm-4 col-md-6 col-lg-4"> {{ subcriterio.nome }}</td>
+        <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios{{ subcriterio.id }}" id="exampleRadios1" value="option1">
+                <label class="form-check-label" for="exampleRadios1">
+                    1 - Mesma Importância
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios{{ subcriterio.id }}" id="exampleRadios3" value="option2">
+                <label class="form-check-label" for="exampleRadios3">
+                    2- Importância pequena de um critério sobre o outro
+                </label>
+            </div>
+             <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios{{ subcriterio.id}}" id="exampleRadios4" value="option3">
+                <label class="form-check-label" for="exampleRadios4">
+                    3 - Importância grande ou essencial
+                </label>
+            </div>
+             <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios{{ subcriterio.id }}" id="exampleRadios5" value="option4">
+                <label class="form-check-label" for="exampleRadios5">
+                    4 - Importância grande ou demonstrada
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios{{ subcriterio.id  }}" id="exampleRadios6" value="option5">
+                <label class="form-check-label" for="exampleRadios6">
+                    5 - Importância absoluta
+                </label>
+            </div>
+                </div>
+        </td>
+    </tr>
+
+            {% endif %}
+        {% endfor %}
+     {{ criterio.criterios.remove(criterio)}}
+     {% endfor %}
+
+    </table>
+
+
+
+{% endblock %}

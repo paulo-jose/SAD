@@ -1,0 +1,261 @@
+{% extends "homepage.html" %} {% block titulo %} Perfil - {{usuario}} {% endblock %} {% block fundo %} {% endblock %} {% block body %}
+
+<body xmlns="http://www.w3.org/1999/html">
+    <!--    <h2> Perfil: {{ usuario.username }} </h2>-->
+
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-primary p-4">
+                <a class="link-nav text-white" href="{{url_for('perfil', id_usuario=usuario.id)}}">Home</a>
+                </br>
+                <a class="link-nav text-white" href="{{url_for('logout')}}">Sair</a>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-primary">
+            <a class="navbar-brand text-white">Perfil: {{ usuario.username }}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+
+
+    </br>
+    </br>
+
+    <center>
+        <h1> Priorização de Projetos </h1>
+    </center>
+    </br>
+
+    {% with msgs = get_flashed_messages(category_filter=["sucesso"]) %} {% if msgs %}
+    <center>
+    {% for msg in msgs %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+    {% endfor %}
+        <p id="alerta"></p>
+    </center>
+    {% endif %} {% endwith %}
+
+        {% with msgs = get_flashed_messages(category_filter=["error"]) %} {% if msgs %}
+    <center>
+    {% for msg in msgs %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+    {% endfor %}
+        <p id="alerta2"></p>
+    </center>
+    {% endif %} {% endwith %}
+
+
+    <div class="card card-default w-100 mt-5 m-2">
+        <div class="card-body">
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#listaProjetos" role="tab" data-toggle="tab">Lista de Projetos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  aria-current="page" href="#listaCriterios" role="tab" data-toggle="tab">Lista de Critérios</a>
+        </li>
+    </ul>
+
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="listaProjetos">
+    </br>
+    <table border="1" class="table table-striped table-bordered">
+
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead>
+
+        {% for projeto in usuario.projetos %}
+
+        <tr>
+            <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> {{ projeto.id }}</td>
+            <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> {{ projeto.nome }}</td>
+            <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <!--                <a class="btn btn-primary"  href="{{url_for('editar', id_projeto=projeto.id)}}">-->
+                <!--                     Editar-->
+                <!--                 </a>-->
+                <a class="btn btn-primary" data-toggle="modal" data-target="#modalProjeto{{ projeto.id }}">
+                    <i class="bi bi-pen"></i>
+                </a>
+
+                <a class="btn btn-danger" onclick="excluir()" href="/excluir/{{ projeto.id }}">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for projeto in usuario.projetos %}
+        <div class="modal fade" id="modalProjeto{{ projeto.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Editar de Projeto</h1>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if form_editar_projeto %}
+                        <form action="/editar/{{ projeto.id }}" method="POST">
+                            {{ form_editar_projeto.csrf_token }} {{ form_editar_projeto.nome_projeto.label(class="label") }} {{ form_editar_projeto.nome_projeto(class="input", value = projeto.nome) }}
+                            <div class="modal-footer">
+                                {{ form_editar_projeto.botao_editar(class="btn btn-primary") }}
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+		</div>
+        {% endfor %}
+
+        {% if msg %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
+
+    </table>
+    <center>
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
+            Cadastrar Projeto
+        </button>
+    </center>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastro de Projeto</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    {% if form %}
+                    <form method="post">
+                        {{ form.csrf_token }}
+                        {{ form.nome_projeto.label(class="label") }}
+                        {{ form.nome_projeto(class="input") }}
+                        <div class="modal-footer">
+                            {{ form.botao_confirmacao(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--    <h3> Lista de Critérios </h3>-->
+
+<div role="tabpanel" class="tab-pane" id="listaCriterios">
+     </br>
+    <table border="1" class="table table-striped table-bordered">
+
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead>
+
+        {% for criterio in criterios %}
+        <tr>
+            <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> {{ criterio.id }}</td>
+            <td class="col-xs-4 col-sm-4 col-md-6 col-lg-6"> {{ criterio.nome }} </td>
+            <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                <a class="btn btn-primary" data-toggle="modal" data-target="#modalEditarCriterio{{ criterio.id  }}">
+                     <i class="bi bi-pen"></i>
+                </a>
+                <a class="btn btn-danger" onclick="excluir()" href="/excluir_criterio/{{ criterio.id }}">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% if msg %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %} {% endfor %}
+    </table>
+
+
+
+    {% for criterio in criterios %}
+    <div class="modal fade" id="modalEditarCriterio{{ criterio.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"> Editar Critério</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    {% if form_criterio %}
+                    <form method="post">
+                        {{ form_criterio.csrf_token }} {{ form_criterio.id_criterio(class="input", type="hidden", value= criterio.id) }} {{ form_criterio.nome_criterio.label(class="label") }} {{ form_criterio.nome_criterio(class="input", value = criterio.nome) }}
+                        <div class="modal-footer">
+                            {{ form_criterio.botao_editar(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <center>
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalCriterio">
+            Cadastrar Critério
+        </button>
+    </center>
+
+    <div class="modal fade" id="modalCriterio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"> Cadastro de Critério</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    {% if form_criterio %}
+                    <form method="post">
+                        {{ form_criterio.csrf_token }} {{ form_criterio.nome_criterio.label(class="label") }} {{ form_criterio.nome_criterio(class="input") }}
+                        <div class="modal-footer">
+                            {{ form_criterio.botao_confirmacao(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+            </div>
+
+			</div>
+</div>
+        </div>
+<div class="float-lg-right">
+    <a class="btn btn-primary btn-lg"  href="{{ url_for('atribuirpesos')}}">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <i class="bi bi-arrow-right"></i>
+    </a>
+</div>
+</body>
+{% endblock %}
