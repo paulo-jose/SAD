@@ -49,7 +49,7 @@ def perfil(id_usuario):
         form_editar_projeto = FormEditarProjeto()
         if form_projeto.validate_on_submit():
             if form_projeto.botao_confirmacao.data:
-                projeto = Projeto(nome=form_projeto.nome_projeto.data, id_usuario=id_usuario)
+                projeto = Projeto(nome=form_projeto.nome_projeto.data, escopo=form_projeto.escopo_projeto.data,gerente=form_projeto.gerente_projeto.data, id_usuario=id_usuario)
                 database.session.add(projeto)
                 database.session.commit()
                 flash(f"Projeto {projeto.nome} criado com sucesso!", "sucesso")
@@ -57,7 +57,7 @@ def perfil(id_usuario):
 
         elif form_criterio.validate_on_submit():
             if form_criterio.botao_confirmacao.data:
-                criterio = Criterio(nome=form_criterio.nome_criterio.data)
+                criterio = Criterio(nome=form_criterio.nome_criterio.data, detalhamento=form_criterio.descricao_criterio.data)
                 database.session.add(criterio)
                 database.session.commit()
                 flash(f"Criterio {criterio.nome} criado com sucesso!", "sucesso")
@@ -162,7 +162,7 @@ def atribuirpesos():
         criterio.criterios = criterios
 
     if len(criterios) >= 2 and len(projetos) >= 2:
-        return render_template("atribuirpesos.html", criterios=criterios, cont=cont)
+        return render_template("atribuirpesos.html", usuario=usuario, criterios=criterios, cont=cont)
     else:
         flash("O numero de critério e de projetos tem que ser maior ou igual a 2", "error")
         return redirect(url_for("perfil", id_usuario=usuario.id))
@@ -172,6 +172,22 @@ def atribuirpesos():
 @app.errorhandler(404)
 def error_path(erro):
     return redirect(url_for("error", erro=erro))
+
+
+@app.route("/template-logado", methods=["GET", "POST"])
+@login_required
+def template():
+    return redirect(url_for("template-logado"))
+
+
+@app.route("/ranqueamento",methods=["GET", "POST"])
+@login_required
+def ranqueamento():
+    criterios = Criterio.query.all()
+    projetos = Projeto.query.all()
+    usuario = current_user
+    return render_template("ranqueamento.html", usuario=usuario, projetos=projetos, criterios=criterios)
+
 
 @app.route("/logout")
 @login_required

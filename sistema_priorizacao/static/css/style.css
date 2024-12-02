@@ -13,6 +13,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
 }
 
 h1 {
@@ -36,6 +37,13 @@ img {
   align-items: center;
   width: fit-content;
   column-gap: 4px;
+}
+
+
+
+.banner {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .link-nav {
@@ -66,9 +74,17 @@ img {
 
 .bg-imagem-pinterest {
   width: 100%;
+  height: 70%;
   position: fixed;
-  top: 50vh;
+  top: 10vh;
 }
+
+.sm-imagem-pinterest {
+  width: 30%;
+  position: fixed;
+  top: 30vh;
+}
+
 
 .container {
   display: flex;
@@ -132,6 +148,21 @@ img {
   font-family: Montserrat;
 }
 
+.checked {
+  color: orange;
+}
+
+.area {
+  width: 100%;
+  font-size: 16px;
+  padding: 50px;
+  border: 2px solid #cdcdcd;
+  border-radius: 20px;
+  box-sizing: border-box;
+  font-family: Montserrat;
+}
+
+
 .botao-login {
   border-radius: 25px;
   padding: 15px 20px;
@@ -140,12 +171,12 @@ img {
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
-  background-color: #0051e6;
+  background-color: #007BFF;
   color: #fff;
 }
 
 .botao-login:hover {
-  background-color: #d50c22;
+  background-color: #11333F;
 }
 
 .link-criarconta {

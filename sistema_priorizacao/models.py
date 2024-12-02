@@ -17,10 +17,13 @@ class Usuario(database.Model, UserMixin):
 class Projeto(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     nome = database.Column(database.String, nullable=False)
+    escopo = database.Column(database.String, nullable=False)
+    gerente = database.Column(database.String, nullable=False)
     id_usuario = database.Column(database.Integer, database.ForeignKey('usuario.id'), nullable=False)
     #criterios = database.relationship("Criterio", backref="projeto", lazy=True)
 
 class Criterio(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     nome = database.Column(database.String, nullable=False)
+    detalhamento = database.Column(database.String, nullable=False)
     #id_projeto = database.Column(database.Integer, database.ForeignKey('projeto.id'), nullable=False)

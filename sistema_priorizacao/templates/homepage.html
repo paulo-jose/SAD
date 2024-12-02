@@ -3,63 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mdb.min.css')}}" />
+
+
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-      <title>
+
+    <title>
         {% block titulo %}
             Priorização de Projetos
         {% endblock %}
     </title>
   </head>
+
+ <header>
+     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+                    data-mdb-collapse-init
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                            class="bi bi-p-square" viewBox="0 0 16 16"
+                    >
+                        <title>Priorização de Proejtos logo</title>
+                        <path d="M5.5 4.002h2.962C10.045 4.002 11 5.104 11 6.586c0 1.494-.967 2.578-2.55 2.578H6.784V12H5.5zm2.77 4.072c.893 0 1.419-.545 1.419-1.488s-.526-1.482-1.42-1.482H6.778v2.97z"/>
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                    </svg>
+                </a>
+                <!-- Left links -->
+ {% block header %}
+
+            </div>
+            <!-- Collapsible wrapper -->
+
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                <!-- Icon -->
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Priorização</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre</a>
+                    </li>
+                </ul>
+
+            </div>
+            {% endblock %}
+            <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+
+ <header>
+
 {% block body %}
   <body class="overflow-hidden">
-    <div class="container">
+
+      {% block fundo %}
+<!--        <img src="{{url_for('static', filename='fotos_sites/fundo.jpg')}}" class="bg-imagem-pinterest" />-->
+
+      <div class="panel bg-primary text-light">
+        <div class="row">
+            <div class="col">
+                <center>
+              <p class="p-3 text-center"><h2 class="display-4"> Sistema de Priorização de Projetos </h2></p>
+               <p class="p-3 text-center"><h2 class="display-4"> <h3>Sistema de Apoio a Decisão</h3></p>
+                </center>
+                </br>
+            </div>
+          </div>
+      </div>
+
+      {% endblock %}
+
+<br/><br/>
+<br/><br/>
+<center>
+<button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#exampleModal">
+  FAZER LOGIN
+</button>
+<center>
+<!-- Modal -->
 
 
-        <nav>
-          <div class="logo-pinterest">
+     <div class="container-popup">
+        <form class="popup" method="post">
+            {{ form.csrf_token }}
+                 <div class="logo-pinterest">
             <svg
-              xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-p-square" viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-p-square" viewBox="0 0 16 16"
             >
-              <title>Priorização de Proejtos logo</title>
                 <path d="M5.5 4.002h2.962C10.045 4.002 11 5.104 11 6.586c0 1.494-.967 2.578-2.55 2.578H6.784V12H5.5zm2.77 4.072c.893 0 1.419-.545 1.419-1.488s-.526-1.482-1.42-1.482H6.778v2.97z"/>
                 <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
             </svg>
-            <h2>Priorização de Projetos</h2>
           </div>
-
-          <div class="restante-nav">
-            <a href="" class="link-nav">Sobre</a>
-            <a href="" class="link-nav">Business</a>
-            <a href="" class="link-nav">Blog</a>
-          </div>
-        </nav>
-        </div>
-      </header>
-
-
-      {% block fundo %}
-        <img src="{{url_for('static', filename='fotos_sites/fundo.jpg')}}" class="bg-imagem-pinterest" />
-      {% endblock %}
-
-
-
-      <div class="container-popup">
-        <form class="popup" method="post">
-            {{ form.csrf_token }}
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-p-square" viewBox="0 0 16 16">
-              <path d="M5.5 4.002h2.962C10.045 4.002 11 5.104 11 6.586c0 1.494-.967 2.578-2.55 2.578H6.784V12H5.5zm2.77 4.072c.893 0 1.419-.545 1.419-1.488s-.526-1.482-1.42-1.482H6.778v2.97z"/>
-              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-        </svg>
         {% block cabecalho %}
           <center><h2>Bem-vindo(a) ao Sistema de Priorização de Projetos</h2></center>
         {% endblock %}
@@ -82,7 +157,6 @@
                 </center>
                 {% endif %}
             {% endwith %}
-
             {% block formulario %}
             <div class="div-input">
                 {{ form.email.label(class="label") }}
@@ -102,5 +176,92 @@
     </div>
   </body>
 {% endblock %}
+
+
+ <br/><br/>
+<br/><br/>
+<br/><br/>
+
+
+<footer class="text-center text-lg-start bg-body-primary text-muted">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Conecte-se conosco nas redes sociais:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-6">
+          <!-- Content -->
+          <h8 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Tribunal do Trabalho da Oitava Região
+          </h8>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> Tribunal Regional do Trabalho da 8ª Região  Tv. D. Pedro I, 746 - Umarizal - Belém/PA
+CEP: 66050-100
+CNPJ: 01.547.343/0001-33</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            segti@trt8.jus.br
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 55  (91) 4008-7073</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2024 Copyright:
+    <a class="text-reset fw-bold" href="https://www.trt8.jus.br/">TRT8</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+
+    <script type="text/javascript" src="{{url_for('static', filename='js/mdb.umd.min.js')}}"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
 </html>
 

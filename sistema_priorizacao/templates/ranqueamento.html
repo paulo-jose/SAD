@@ -5,13 +5,12 @@
 {% endblock %}
 
 {% block cabecalho %}
-    <h2 class="display-1"> Atribuir Pesos Par a Par</h2>
+    <h2 class="display-1"> Ranqueamento </h2>
 {% endblock %}
 
+
+
 {% block header %}
-
-<!-- Left links -->
-
 <a class="text-reset me-3 align-items-center" href="{{url_for('perfil', id_usuario=usuario.id)}}">
     <i class="fas fa-house"></i>
 </a>
@@ -111,8 +110,6 @@
     </div>
 
 </div>
-
-
 {% endblock %}
 
 
@@ -125,6 +122,7 @@
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{url_for('perfil', id_usuario=usuario.id)}}">Projetos</a></li>
                 <li class="breadcrumb-item"><a href="{{ url_for('atribuirpesos')}}">Atribuir Pesos</a></li>
+                <li class="breadcrumb-item"><a href="#">Ranqueamento</a></li>
             </ol>
         </nav>
     </div>
@@ -133,75 +131,33 @@
 <div class="panel bg-primary text-light">
     <div class="row">
         <div class="col">
-            <div class="p-3 text-center"><h1 class="display-4"> Atribuir Pesos Par a Par </h1></div>
+            <div class="p-3 text-center"><h1 class="display-4"> Ranqueamento </h1></div>
         </div>
     </div>
 </div>
 
-<table border="1" class="table table-striped">
-        <thead class="table">
-            <tr>
-                <th class="text-center" scope="col">Critério</th>
-                <th class="text-center" scope="col">Critério 2</th>
-                <th class="text-center" scope="col">Escala de Preferencia</th>
-            </tr>
-        </thead>
-
-    {% set count = namespace(value=0) %}
-    {% for criterio in criterios %}
-    {% for subcriterio in criterio.criterios %}
-    {% if criterio != subcriterio %}
-
-    <tr>
-        <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"> {{ criterio.nome }}</td>
-        <td class="col-xs-4 col-sm-4 col-md-6 col-lg-4 text-center"> {{ subcriterio.nome }}</td>
-        <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios{{ count.value }}" id="exampleRadios1" value="option1" required>
-                <label class="form-check-label" for="exampleRadios1">
-                    1 - Mesma Importância
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios{{ count.value }}" id="exampleRadios3" value="option2" required>
-                <label class="form-check-label" for="exampleRadios3">
-                    2- Importância pequena de um critério sobre o outro
-                </label>
-            </div>
-             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios{{ count.value}}" id="exampleRadios4" value="option3" required>
-                <label class="form-check-label" for="exampleRadios4">
-                    3 - Importância grande ou essencial
-                </label>
-            </div>
-             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios{{ count.value }}" id="exampleRadios5" value="option4" required>
-                <label class="form-check-label" for="exampleRadios5">
-                    4 - Importância grande ou demonstrada
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios{{ count.value  }}" id="exampleRadios6" value="option5" required>
-                <label class="form-check-label" for="exampleRadios6">
-                    5 - Importância absoluta
-                </label>
-            </div>
-                </div>
-        </td>
-    </tr>
-            {% endif %}
-         {% set count.value = count.value + 1 %}
-        {% endfor %}
-     {{ criterio.criterios.remove(criterio)}}
-     {% endfor %}
-
-    </table>
-
-    <center>
-        <a class="btn btn-primary btn-block"  href="{{url_for('ranqueamento')}}" >
-            Calcular
-        </a>
-    </center>
+</br>
+<ul class="list-group list-group-light">
+   {% for projeto in usuario.projetos %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img src="{{url_for('static', filename='fotos_sites/gerenciamento-de-projetos.png')}}" alt="" style="width: 45px; height: 45px"
+        class="rounded-circle" />
+      <div class="ms-3">
+        <p class="fw-bold mb-1">{{ projeto.nome }}</p>
+       </div>
+    </div>
+      <h2><span class="badge badge-primary">9.7</span></h2>
+      <div class="text-center">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+      </div>
+  </li>
+  {% endfor %}
+</ul>
 
 
 {% endblock %}
